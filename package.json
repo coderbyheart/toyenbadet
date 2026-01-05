@@ -1,0 +1,99 @@
+{
+  "name": "@coderbyheart/toyenbadet",
+  "version": "0.0.0-development",
+  "description": "Provide historical usage metrics for Oslo's Tøyenbadet",
+  "type": "module",
+  "author": "Markus Tacker | https://coderbyheart.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coderbyheart/toyenbadet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/coderbyheart/toyenbadet/issues"
+  },
+  "homepage": "https://github.com/coderbyheart/toyenbadet#readme",
+  "keywords": [
+    "aws",
+    "cdk",
+    "typescript",
+    "lambda",
+    "serverless"
+  ],
+  "scripts": {
+    "prepare": "husky && check-node-version --package",
+    "cdk:bootstrap": "node --experimental-transform-types --no-warnings ./cdk/bootstrap.ts",
+    "cdk:lambda:update": "node --experimental-transform-types --no-warnings cdk/update-lambdas.ts",
+    "cdk:prod:deploy": "node --experimental-transform-types --no-warnings ./cdk/deploy-to-production.ts",
+    "test": "node --no-warnings --experimental-transform-types --test \"!(node_modules)/**/*.spec.ts\"",
+    "test:watch": "node --no-warnings --experimental-transform-types --test --watch \"!(node_modules)/**/*.spec.ts\""
+  },
+  "lint-staged": {
+    "*.{md,json,yaml,yml}": [
+      "prettier --write"
+    ],
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "eslint"
+    ]
+  },
+  "prettier": "@bifravst/prettier-config",
+  "release": {
+    "branches": [
+      "saga"
+    ],
+    "remoteTags": true,
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/github",
+        {
+          "successComment": false,
+          "failComment": false
+        }
+      ]
+    ]
+  },
+  "devDependencies": {
+    "@aws-cdk/toolkit-lib": "1.12.3",
+    "@aws-sdk/client-cloudformation": "3.962.0",
+    "@aws-sdk/client-dynamodb": "3.962.0",
+    "@aws-sdk/client-iam": "3.962.0",
+    "@aws-sdk/client-lambda": "3.962.0",
+    "@aws-sdk/client-sts": "3.962.0",
+    "@aws-sdk/credential-providers": "3.962.0",
+    "@aws-sdk/util-dynamodb": "3.962.0",
+    "@bifravst/aws-cdk-lambda-helpers": "4.0.1",
+    "@bifravst/ci": "2.1.1",
+    "@bifravst/cloudformation-helpers": "9.1.1",
+    "@bifravst/eslint-config-typescript": "6.4.4",
+    "@bifravst/from-env": "3.0.2",
+    "@bifravst/prettier-config": "1.1.17",
+    "@commitlint/config-conventional": "20.3.0",
+    "@types/aws-lambda": "8.10.159",
+    "@types/command-line-args": "5.2.3",
+    "@types/node": "25.0.3",
+    "@typescript/native-preview": "^7.0.0-dev.20260105.1",
+    "aws-cdk": "2.1100.2",
+    "aws-cdk-lib": "2.233.0",
+    "cdk": "2.1100.2",
+    "check-node-version": "4.2.1",
+    "command-line-args": "6.0.1",
+    "commitlint": "20.3.0",
+    "eslint": "9.39.2",
+    "husky": "9.1.7",
+    "lint-staged": "16.2.7",
+    "prettier": "3.7.4",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=24",
+    "npm": ">=11"
+  },
+  "dependencies": {
+    "@aws-lambda-powertools/metrics": "2.30.0",
+    "@middy/core": "6.x",
+    "@sinclair/typebox": "0.34.46"
+  }
+}
